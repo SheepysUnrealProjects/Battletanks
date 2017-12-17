@@ -3,8 +3,6 @@
 #include "TankPlayerController.h"
 
 
-
-
 ATank* ATankPlayerController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
@@ -23,4 +21,20 @@ void ATankPlayerController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("PlayerController possesing %s"), *(Controlledtank->GetName()));
 	}
+}
+
+void ATankPlayerController::Tick(float deltaseconds)
+{
+	Super::Tick(deltaseconds);
+
+	AimTowardsCrosshair();
+}
+
+void ATankPlayerController::AimTowardsCrosshair() 
+{
+	if (!GetControlledTank()) { return; }
+
+	//Get world location if linetrace through crosshair
+	//If it hits the landscape
+		//Tell controlled tank to aim at this point
 }

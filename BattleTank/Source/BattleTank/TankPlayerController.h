@@ -22,4 +22,8 @@ public:
 
 	void BeginPlay() override;
 	
+	void Tick(float deltaseconds) override;
+
+	//Start the tank moving the barrel so that a shot would be hit
+	void AimTowardsCrosshair();
 };
