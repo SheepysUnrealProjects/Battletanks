@@ -19,4 +19,5 @@ private:
 		void BeginPlay() override;
 		ATank* GetControlledTank() const;
 		ATank* GetPlayerTank() const;
+		void Tick(float delta) override;
 };
