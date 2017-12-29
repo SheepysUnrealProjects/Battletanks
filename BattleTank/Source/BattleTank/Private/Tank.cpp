@@ -51,14 +51,20 @@ void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 
 void ATank::Fire()
 {
-	if (!Barrel) {return;	}
-	//Spawn projectile and shot it
-	const FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-	const FRotator StartRotation = Barrel->GetSocketRotation(FName("Projectile"));
+	bool isreloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	if (Barrel && isreloaded) 
+	{
+		//Spawn projectile and shot it
+		const FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+		const FRotator StartRotation = Barrel->GetSocketRotation(FName("Projectile"));
 
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, StartLocation, StartRotation);
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, StartLocation, StartRotation);
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
+	
 
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: Tank->Fire() called!"), Time)
+	
+	
 }
 

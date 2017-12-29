@@ -21,6 +21,10 @@ class BATTLETANK_API ATank : public APawn
 private:
 	// Sets default values for this pawn's properties
 	ATank();
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0.0;
 
 protected:
 	// Called when the game starts or when spawned
