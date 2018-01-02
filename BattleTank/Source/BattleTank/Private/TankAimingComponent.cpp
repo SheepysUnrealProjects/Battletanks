@@ -39,7 +39,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	// ...
 }
 
-void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector WorldSpaceAim)
 {
 	if (!ensure(Barrel)) return;
 
@@ -71,6 +71,7 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) 
 {
 	//Work out difference between current barrel rotation, and aimdirection
+	if (!ensure(Barrel) || !ensure(Turret)) return;
 	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotation;

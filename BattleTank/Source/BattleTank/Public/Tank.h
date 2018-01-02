@@ -2,17 +2,13 @@
 
 #pragma once
 
-
-
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
 class UTankBarrel;
-class UTankAimingComponent;
 class UTankTurret;
 class AProjectile;
-class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -29,21 +25,14 @@ private:
 
 	virtual void BeginPlay() override;
 
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* Tankaimingcomponent = nullptr;
+
 	 
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr;
-
-
-public:	
-
-	void AimAt(FVector HitLocation); 
+public:
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void Fire();
 
+	// TODO remove once firing is moved 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float LaunchSpeed = 4000;	
 

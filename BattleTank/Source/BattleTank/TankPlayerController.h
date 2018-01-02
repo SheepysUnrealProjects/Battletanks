@@ -1,17 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
-
-
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h" //Must be last include
 
 
-
-
-class ATank;
 /**
  * 
  */
@@ -22,9 +16,6 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = "setup")
-	ATank* GetControlledTank() const;
-
 	void BeginPlay() override;
 	
 	void Tick(float deltaseconds) override;
