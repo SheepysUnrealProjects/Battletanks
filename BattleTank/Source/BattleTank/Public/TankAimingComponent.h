@@ -11,6 +11,7 @@
 //Forward declaration
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
 UENUM()
 enum class EFiringStatus : uint8
@@ -43,15 +44,26 @@ public:
 
 	void AimAt(FVector WorldSpaceAim);
 
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void Initialise(UTankTurret* TurretToSet, UTankBarrel* Barreltoset);
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 4000;
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	void Fire();
 
 private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);	
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0.0;
+
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		void Initialise(UTankTurret* TurretToSet, UTankBarrel* Barreltoset);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float LaunchSpeed = 4000;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		TSubclassOf<AProjectile> ProjectileBlueprint;
 };
