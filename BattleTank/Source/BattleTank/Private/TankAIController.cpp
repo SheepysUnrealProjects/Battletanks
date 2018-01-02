@@ -8,7 +8,7 @@ void ATankAIController::Tick(float delta)
 	Super::Tick(delta);
 
 	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-	if (!PlayerPawn)
+	if (!ensure(PlayerPawn))
 	{
 		 return;
 	}
