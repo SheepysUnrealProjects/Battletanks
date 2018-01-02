@@ -8,6 +8,9 @@
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h" //Must be last include
 
+
+
+
 class ATank;
 /**
  * 
@@ -19,6 +22,7 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	
 	
 public:
+	UFUNCTION(BlueprintCallable, Category = "setup")
 	ATank* GetControlledTank() const;
 
 	void BeginPlay() override;
@@ -28,7 +32,12 @@ public:
 	//Start the tank moving the barrel so that a shot would be hit
 	void AimTowardsCrosshair();
 
+
+protected:
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void foundAimingComponent(UTankAimingComponent* AimCompRef);
 private:
+	
 	bool GetLookVectorHitLocation(FVector& OutHitResult, FVector& LookDirection) const;
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
