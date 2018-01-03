@@ -36,12 +36,11 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-		EFiringStatus FiringState = EFiringStatus::Aiming;
+	EFiringStatus FiringState = EFiringStatus::Reloading;
+
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
 public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
 	void AimAt(FVector WorldSpaceAim);
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
@@ -66,4 +65,10 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 		TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	bool IsBarrelMoving();
+
+	FVector AimDirection;
+
+
 };
