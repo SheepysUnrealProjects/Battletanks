@@ -50,8 +50,7 @@ public:
 	EFiringStatus GetFiringState() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Ammo")
-
-	int GetCurrentAmmo() const;
+	int32 GetCurrentAmmo() const;
 
 private:
 	UTankBarrel* Barrel = nullptr;
@@ -77,5 +76,6 @@ private:
 
 	FVector AimDirection;
 
-	int CurrentAmmo = 3;
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	int32 CurrentAmmo = 3;
 };

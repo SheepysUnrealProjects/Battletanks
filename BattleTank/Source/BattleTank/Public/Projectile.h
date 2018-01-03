@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Particles/ParticleSystemComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
@@ -20,7 +21,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -30,4 +31,10 @@ public:
 	
 private:
 	UProjectileMovementComponent * ProjectileMovement = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+		UStaticMeshComponent* CollisionMesh = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+		UParticleSystemComponent* LaunchBlast = nullptr;
 }; 
