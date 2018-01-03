@@ -18,7 +18,8 @@ enum class EFiringStatus : uint8
 {
 	Reloading,
 	Aiming,
-	Locked		
+	Locked,
+	OutOfAmmo
 };
 
 //Holds barrel´s properties and elevate method
@@ -34,7 +35,7 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
+	
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringState = EFiringStatus::Reloading;
 
@@ -45,6 +46,12 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
+
+	EFiringStatus GetFiringState() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Ammo")
+
+	int GetCurrentAmmo() const;
 
 private:
 	UTankBarrel* Barrel = nullptr;
@@ -70,5 +77,5 @@ private:
 
 	FVector AimDirection;
 
-
+	int CurrentAmmo = 3;
 };
