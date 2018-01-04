@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "TankAIController.h"
 #include "Tank.h"
 #include "TankAimingComponent.h"
-#include "TankAIController.h"
 
 void ATankAIController::Tick(float delta)
 {
@@ -49,5 +49,6 @@ void ATankAIController::SetPawn(APawn* InPawn)
 
 void ATankAIController::OnDeath()
 {
+	if (!GetPawn()) return;
 	GetPawn()->DetachFromControllerPendingDestroy();
 }
