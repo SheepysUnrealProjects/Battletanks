@@ -22,5 +22,7 @@ protected:
 private:
 		void BeginPlay() override;
 		void Tick(float delta) override;
-		
+		virtual void SetPawn(APawn* InPawn) override;
+		UFUNCTION()
+		void OnDeath(); //Delegate Method
 };

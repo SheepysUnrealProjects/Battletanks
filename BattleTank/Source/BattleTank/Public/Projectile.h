@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "Kismet/GameplayStatics.h"
+#include "PhysicsEngine/RadialForceComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -23,9 +25,6 @@ protected:
 	virtual void BeginPlay() override;
 	
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 	void LaunchProjectile(float Speed);
 
 	
@@ -37,4 +36,21 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
 		UParticleSystemComponent* LaunchBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+		UParticleSystemComponent* ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+		URadialForceComponent* ExplosionForce = nullptr;
+
+	UFUNCTION(BlueprintCallable, Category = "Onhit")
+		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		float DestroyDelay = 3.0;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		float ProjectileDamage = 20.0;
+
+	void OnTimerExpire();
 }; 

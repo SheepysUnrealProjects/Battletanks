@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Tank.h"
 #include "TankPlayerController.h"
 #include "TankAimingComponent.h"
 
@@ -84,4 +85,22 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 		ScreenLocation.Y,
 		CameraWorldLocation,
 		LookDirection);
+}
+
+void ATankPlayerController::OnDeath()
+{
+	StartSpectatingOnly();
+}
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) return;
+
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnDeath);
+	}
+	
 }

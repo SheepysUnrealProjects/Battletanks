@@ -41,5 +41,8 @@ private:
 
 	float LineTraceRange = 1000000;
 
-	
+	UFUNCTION()
+	void OnDeath(); //Delegate Method
+
+	virtual void SetPawn(APawn* InPawn) override;
 };
